@@ -15,6 +15,7 @@ setGradient = () => {
     css.textContent = body.style.background + `;`;
 }
 
+//create random button and add class 'rndBtn'
 createRndBtn = () => {
     let btn = document.createElement("button");
     btn.innerHTML = "Randomize";
@@ -22,19 +23,23 @@ createRndBtn = () => {
     return btn;
 }
 
+//append button to body
 appendRndBtn = () => {
     let btn = createRndBtn();
-    color1.parentNode.appendChild(btn);
+    body.appendChild(btn);
 }
 
+//generating random number for RGB
 generateRndNum = () => {
     return Math.floor(Math.random() * (255 - 0)) + 0;
 }
 
+//generate RGB with random numbers
 generateRndRGB = () => {
     return `rgb(${generateRndNum()}, ${generateRndNum()}, ${generateRndNum()})`;
 }
 
+//change body background to random RGB colors
 rndColors = () => {
     body.style.background = 
         `linear-gradient(to right, ${generateRndRGB()}, ${generateRndRGB()})`;
@@ -46,6 +51,8 @@ color1.addEventListener("input", setGradient);
 
 color2.addEventListener("input", setGradient);
 
+//event delgation because button has been made dynamically
+//if button is clicked, call 'rndColors' and update textContent
 document.addEventListener("click", (e) => {
     if(e.target && e.target.matches(".rndBtn")){
         rndColors();
